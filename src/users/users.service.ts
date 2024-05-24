@@ -16,4 +16,8 @@ export class UsersService {
   findUserByEmail(email: string): Promise<User> {
     return this.users.findOne({where: {email}});
   }
+
+  findUserById(id: string): Promise<User> {
+    return this.users.findByPk(id);
+  }
 }

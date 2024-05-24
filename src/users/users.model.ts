@@ -1,4 +1,5 @@
 import { Table, Column, Model, Unique, BelongsTo, DataType, PrimaryKey, ForeignKey, HasOne, HasMany} from 'sequelize-typescript';
+import { databaseProviders } from 'src/database/database.providers';
 import { Pool } from 'src/pools/pools.model';
 
 
@@ -15,6 +16,9 @@ export class User extends Model {
 
   @Column
   password: string;
+
+  @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
+  wallets: string[];
 
   @HasMany(() => Pool)
   pools: Pool[]
