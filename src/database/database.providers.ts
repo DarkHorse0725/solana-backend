@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Pool } from 'src/pools/pools.model';
 import { User } from 'src/users/users.model';
 
 
@@ -17,7 +18,8 @@ export const databaseProviders = [
         database: process.env.DB_DATABASE,
       });
       sequelize.addModels([
-        User
+        User,
+        Pool
       ]);
       await sequelize.sync();
       return sequelize;
