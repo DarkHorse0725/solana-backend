@@ -12,21 +12,16 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ){}
+  ) { }
 
   async signUp(userData: SignupDto) {
-    try {
-      const findUser = await this.usersService.findUserByEmail(userData.email);
-      if (!!findUser) throw new UnauthorizedException("Email is exist");
-      const hashedPassword = await bcrypt.hash(userData.password, saltOrRounds);
-      const createdUser = await this.usersService.create({...userData, password: hashedPassword});
-      return createdUser;
-    } catch (e) {
-      throw new HttpException({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        error: 'Internal Server error'
-      }, HttpStatus.INTERNAL_SERVER_ERROR);
+    const findUser = await this.usersService.findUserByEmail(userData.email);
+    if (!!findUser) {
+      throw new UnauthorizedException("Email is exist");
     }
+    const hashedPassword = await bcrypt.hash(userData.password, saltOrRounds);
+    const createdUser = await this.usersService.create({ ...userData, password: hashedPassword });
+    return createdUser;
   }
 
   async signin(email: string, password: string) {
@@ -38,9 +33,9 @@ export class AuthService {
         throw new UnauthorizedException("Invalid password");
       }
       const payload = { sub: user.id, email: user.email };
-    return {
-      access_token: await this.jwtService.signAsync(payload)
-    };
+      return {
+        access_token: await this.jwtService.signAsync(payload)
+      };
     } catch (e) {
       throw new HttpException({
         status: HttpStatus.INTERNAL_SERVER_ERROR,
