@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from './users.model';
-import { CreateUserDto } from './users.dto';
+import { CreateUserDto, UpdateUserDto } from './users.dto';
 
 @Injectable()
 export class UsersService {
@@ -18,6 +18,11 @@ export class UsersService {
   }
 
   findUserById(id: string): Promise<User> {
+    return this.users.findByPk(id);
+  }
+
+  async updateUserById(id: string, data: UpdateUserDto): Promise<User> {
+    await this.users.update(data, {where: {id}});
     return this.users.findByPk(id);
   }
 }

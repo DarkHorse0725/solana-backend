@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { SignupDto } from './auth.dto';
@@ -41,6 +41,22 @@ export class AuthService {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
         error: 'Internal Server error'
       }, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async changePassword(userId: string, oldPass: string, newPass: string) {
+    try {
+      const user = await this.usersService.findUserById(userId);
+      if (!user) throw new UnauthorizedException();
+      const isMatch = await bcrypt.compare(oldPass, user.password);
+      if (!isMatch) {
+        throw new UnauthorizedException("Current password is wrong");
+      }
+      const hashedPassword = await bcrypt.hash(newPass, saltOrRounds);
+      const updatedUser = await this.usersService.updateUserById(user.id, {password: hashedPassword});
+      return updatedUser;
+    } catch (e) {
+      throw new InternalServerErrorException();
     }
   }
 }

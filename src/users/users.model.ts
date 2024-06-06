@@ -20,6 +20,12 @@ export class User extends Model {
   @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
   wallets: string[];
 
+  @Column
+  telegram: string;
+
+  @Column({type: DataType.ARRAY(DataType.JSON)})
+  socials: object[];
+
   @HasMany(() => Pool)
   pools: Pool[]
 }   
