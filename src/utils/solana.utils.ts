@@ -3,7 +3,7 @@ import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
 import * as Paidnet from '../idl/paidnet.json';
 
 
-const paidnetId = new PublicKey("AqwFRLotetpQpfVSF9pPFAR1MqB9NmY3a9fUyjJ9nBCv");
+const paidnetId = new PublicKey("EfomQSjz9bXS183uXsmEMEqCeAZUQ6bUvWPnAFgVNvpY");
 const connection = new Connection(clusterApiUrl('devnet'));
 const provider = new AnchorProvider(connection, {} as any, { preflightCommitment: 'finalized' });
 const paidnetProgram = new Program(Paidnet as Idl, paidnetId, provider);
