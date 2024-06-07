@@ -13,6 +13,15 @@ export class Pool extends Model {
   @Column
   pubkey: string;
 
+  @Column
+  projectName: string;
+
+  @Column
+  banner: string;
+
+  @Column({type: DataType.ARRAY(DataType.JSON)})
+  socials: object[];  
+
   @ForeignKey(() => User)
   @Column({type: DataType.UUID})
   userId: string;

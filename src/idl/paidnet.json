@@ -1,0 +1,866 @@
+{
+  "version": "0.1.0",
+  "name": "paidnet",
+  "instructions": [
+    {
+      "name": "createPool",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "purchaseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "uints",
+          "type": {
+            "array": [
+              "u64",
+              18
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "updateTime",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "earlyPoolCloseTime",
+          "type": "i64"
+        },
+        {
+          "name": "openPoolCloseTime",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "updateTgeDate",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "tgeDate",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "initUser",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userVesting",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buyTokenInEarlyPool",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardPot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakerAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userVesting",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "purchaseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "purchaseBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "buyTokenInOpenPool",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userVesting",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "purchaseAmount",
+          "type": "u64"
+        },
+        {
+          "name": "purchaseBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "fundIdoToken",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "idoVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "withdrawIdoToken",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "idoVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "userWithdrawPurchase",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userPurchaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userVesting",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unlockIdo",
+      "accounts": [
+        {
+          "name": "signer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "idoMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vestingStorageAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userVesting",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolStorageAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "idoVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "PoolStorage",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "purchaseToken",
+            "type": "publicKey"
+          },
+          {
+            "name": "offeredCurrency",
+            "type": {
+              "defined": "OfferedCurrency"
+            }
+          },
+          {
+            "name": "maxPurchaseAmountForEarlyAccess",
+            "type": "u64"
+          },
+          {
+            "name": "maxPurchaseAmountForKycUser",
+            "type": "u64"
+          },
+          {
+            "name": "maxPurchaseAmountForNotKycUser",
+            "type": "u64"
+          },
+          {
+            "name": "tokenFeePercentage",
+            "type": "u16"
+          },
+          {
+            "name": "tokenFeeCliamedStatus",
+            "type": "bool"
+          },
+          {
+            "name": "earlyPoolParticipationFeePercentage",
+            "type": "u16"
+          },
+          {
+            "name": "openPoolParticipationFeePercentage",
+            "type": "u16"
+          },
+          {
+            "name": "openPoolProportion",
+            "type": "u16"
+          },
+          {
+            "name": "earlyPoolProportion",
+            "type": "u16"
+          },
+          {
+            "name": "totalRaiseAmount",
+            "type": "u64"
+          },
+          {
+            "name": "earlyPoolOpenTime",
+            "type": "i64"
+          },
+          {
+            "name": "earlyPoolCloseTime",
+            "type": "i64"
+          },
+          {
+            "name": "openPoolOpenTime",
+            "type": "i64"
+          },
+          {
+            "name": "openPoolCloseTime",
+            "type": "i64"
+          },
+          {
+            "name": "participationFeeAmount",
+            "type": "u16"
+          },
+          {
+            "name": "participationFeeClaimedStatus",
+            "type": "bool"
+          },
+          {
+            "name": "purchasedAmountInOpenPool",
+            "type": "u64"
+          },
+          {
+            "name": "purchasedAmountInEarlyAccess",
+            "type": "u64"
+          },
+          {
+            "name": "purchasedAmount",
+            "type": "u64"
+          },
+          {
+            "name": "fundClaimedAmount",
+            "type": "u64"
+          },
+          {
+            "name": "purchaseBump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserPurchaseAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "principal",
+            "type": "u64"
+          },
+          {
+            "name": "fee",
+            "type": "u64"
+          },
+          {
+            "name": "withdrawn",
+            "type": "u64"
+          },
+          {
+            "name": "earlyPurchased",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserVestingAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "totalAmount",
+            "type": "u64"
+          },
+          {
+            "name": "claimedAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VestingStorage",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "idoToken",
+            "type": "publicKey"
+          },
+          {
+            "name": "tgeDate",
+            "type": "i64"
+          },
+          {
+            "name": "tgePercentage",
+            "type": "u16"
+          },
+          {
+            "name": "vestingCliff",
+            "type": "i64"
+          },
+          {
+            "name": "vestingFreguency",
+            "type": "u64"
+          },
+          {
+            "name": "numberOfVestingRelease",
+            "type": "u64"
+          },
+          {
+            "name": "totalFundedAmount",
+            "type": "u64"
+          },
+          {
+            "name": "funded",
+            "type": "bool"
+          },
+          {
+            "name": "claimable",
+            "type": "bool"
+          },
+          {
+            "name": "emergencyCancelled",
+            "type": "bool"
+          },
+          {
+            "name": "privateRaise",
+            "type": "bool"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "vaultBump",
+            "type": "u8"
+          },
+          {
+            "name": "initialTgeDate",
+            "type": "i64"
+          },
+          {
+            "name": "tgeUpdateAttempts",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "OfferedCurrency",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "rate",
+            "type": "u64"
+          },
+          {
+            "name": "decimals",
+            "type": "u16"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MaxPurchaseForKYCUserNotValid",
+      "msg": "Invalid max purchased for not kyc users"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidParam",
+      "msg": "Invalid params"
+    },
+    {
+      "code": 6002,
+      "name": "NotFunded",
+      "msg": "Not funded yet"
+    },
+    {
+      "code": 6003,
+      "name": "NotClaimable",
+      "msg": "Not claimable"
+    },
+    {
+      "code": 6004,
+      "name": "NotclaimableAmount",
+      "msg": "Not claimable amount"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidTokenFeePercentage",
+      "msg": "Inavalid token fee percentage"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidGalaxyPoolProportion",
+      "msg": "Invalid galaxy pool proportion"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidEarlyAccessProportion",
+      "msg": "Invalid early access proportion"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidTime",
+      "msg": "Invalid Time"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidTGEPercentage",
+      "msg": "Invalid TGE percentage"
+    },
+    {
+      "code": 6011,
+      "name": "NotAllowedToAdjustTGEDateExceedsAttempts",
+      "msg": "Not allowed to adjust tge date exceeds attempts"
+    },
+    {
+      "code": 6012,
+      "name": "NotAllowedToAdjustTGEDateTooFar",
+      "msg": "Not allowed to adjust tge date too far"
+    },
+    {
+      "code": 6013,
+      "name": "TimeOutBuyIDOToken",
+      "msg": "Time out buy ido token"
+    },
+    {
+      "code": 6014,
+      "name": "ExceedMaxPurchaseAmountForEarlyAccess",
+      "msg": "Exceed max purchase amount for early access"
+    },
+    {
+      "code": 6015,
+      "name": "AlreadyClaimedTotoalAmount",
+      "msg": "Already claimed total amount"
+    },
+    {
+      "code": 6016,
+      "name": "NotEnoughStaker",
+      "msg": "You did not stake enough token"
+    }
+  ],
+  "metadata": {
+    "address": "AqwFRLotetpQpfVSF9pPFAR1MqB9NmY3a9fUyjJ9nBCv"
+  }
+}
