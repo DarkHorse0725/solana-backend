@@ -3,5 +3,5 @@ export type CreatePoolDto = {
   banner?: string;
   socials?: object[];
   userId: string;
-  projectName: string;
+  title: string;
 }

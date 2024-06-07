@@ -1,4 +1,4 @@
-import { Controller, HttpCode, HttpStatus, Post, UseInterceptors, Body, UploadedFile } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Post, UseInterceptors, Body, UploadedFile, Get } from '@nestjs/common';
 import { PoolsService } from './pools.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -27,5 +27,12 @@ export class PoolsController {
     const poolData = {...body, banner: `${process.env.BASE_URL}/image/${file.filename}`};
     const pool = await this.poolService.create(poolData);
     return pool;
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get()
+  async getPools () {
+    const pools = await this.poolService.getPools();
+    return pools;
   }
 }

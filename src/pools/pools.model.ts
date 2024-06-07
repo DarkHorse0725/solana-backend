@@ -14,7 +14,7 @@ export class Pool extends Model {
   pubkey: string;
 
   @Column
-  projectName: string;
+  title: string;
 
   @Column
   banner: string;

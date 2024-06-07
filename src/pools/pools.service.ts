@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Pool } from './pools.model';
 import { CreatePoolDto } from './pools.dto';
+import { getPools } from 'src/utils/solana.utils';
 
 @Injectable()
 export class PoolsService {
@@ -11,5 +12,10 @@ export class PoolsService {
 
   create(poolData: CreatePoolDto): Promise<Pool> {
     return this.pools.create(poolData);
+  }
+
+  async getPools () {
+    const pools = await getPools();
+    return pools;
   }
 }
