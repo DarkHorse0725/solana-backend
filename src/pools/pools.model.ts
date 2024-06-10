@@ -19,6 +19,9 @@ export class Pool extends Model {
   @Column
   banner: string;
 
+  @Column
+  description: string;
+
   @Column({type: DataType.ARRAY(DataType.JSON)})
   socials: object[];  
 

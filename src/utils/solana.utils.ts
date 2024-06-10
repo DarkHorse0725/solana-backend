@@ -13,3 +13,8 @@ export const getPools = async () => {
   const pools = await paidnetProgram.account.pool.all();
   return pools;
 }
+
+export const getPoolByPubkey = async (pubkey: string)  => {
+  const pool = await paidnetProgram.account.pool.fetch(new PublicKey(pubkey));
+  return pool;
+}

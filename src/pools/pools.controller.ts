@@ -1,4 +1,4 @@
-import { Controller, HttpCode, HttpStatus, Post, UseInterceptors, Body, UploadedFile, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Post, UseInterceptors, Body, UploadedFile, Get, UseGuards, Request, Param } from '@nestjs/common';
 import { PoolsService } from './pools.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -20,6 +20,20 @@ export class PoolsController {
   async getPools () {
     const pools = await this.poolService.getPools();
     return pools;
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get(':pubkey')
+  async getPoolByPubkey (@Param() {pubkey}: {pubkey: string;}) {
+    const pool = await this.poolService.findByPubkey(pubkey);
+    return pool;
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get('account/:pubkey')
+  async getPoolAccount (@Param() {pubkey}: {pubkey: string;}) {
+    const pool = await this.poolService.getPool(pubkey);
+    return pool;
   }
 
   @UseGuards(AuthGuard)
