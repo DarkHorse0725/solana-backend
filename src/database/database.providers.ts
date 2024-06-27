@@ -4,7 +4,6 @@ import { User } from 'src/users/users.model';
 
 
 const port = Number(process.env.DB_PORT);
-
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',

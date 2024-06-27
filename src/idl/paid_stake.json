@@ -1,12 +1,19 @@
 {
   "version": "0.1.0",
-  "name": "paid_stake",
+  "name": "stake",
+  "constants": [
+    {
+      "name": "SEED",
+      "type": "string",
+      "value": "\"anchor\""
+    }
+  ],
   "instructions": [
     {
-      "name": "initPool",
+      "name": "initialize",
       "accounts": [
         {
-          "name": "owner",
+          "name": "creator",
           "isMut": true,
           "isSigner": true
         },
@@ -21,9 +28,24 @@
           "isSigner": false
         },
         {
-          "name": "pool",
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardPort",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
+        },
+        {
+          "name": "appState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
         },
         {
           "name": "systemProgram",
@@ -33,13 +55,47 @@
       ],
       "args": [
         {
+          "name": "rewardPerBlock",
+          "type": "u64"
+        },
+        {
           "name": "rewardDecimals",
           "type": "u8"
         },
         {
-          "name": "farmDecimals",
+          "name": "stakeDecimals",
           "type": "u8"
         },
+        {
+          "name": "isToken2",
+          "type": "bool"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "updateState",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "appState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
         {
           "name": "rewardPerBlock",
           "type": "u64"
@@ -47,103 +103,7 @@
       ]
     },
     {
-      "name": "initReward",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rewardMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ownerToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "rewardPot",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        },
-        {
-          "name": "potBump",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "addReward",
-      "accounts": [
-        {
-          "name": "owner",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "rewardMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "ownerToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pool",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "rewardPot",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "initStaker",
+      "name": "fundReward",
       "accounts": [
         {
           "name": "signer",
@@ -151,8 +111,59 @@
           "isSigner": true
         },
         {
-          "name": "pool",
+          "name": "rewardMint",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardPort",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claimReward",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "rewardMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardPort",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -161,7 +172,12 @@
           "isSigner": false
         },
         {
-          "name": "systemProgram",
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "appState",
           "isMut": false,
           "isSigner": false
         }
@@ -169,59 +185,21 @@
       "args": []
     },
     {
-      "name": "initVault",
+      "name": "rewardView",
       "accounts": [
         {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "stakeMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "pool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "staker",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeVault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "systemProgram",
+          "name": "appState",
           "isMut": false,
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        },
-        {
-          "name": "vaultBump",
-          "type": "u8"
-        }
-      ]
+      "args": [],
+      "returns": "u64"
     },
     {
       "name": "stake",
@@ -237,22 +215,27 @@
           "isSigner": false
         },
         {
-          "name": "pool",
+          "name": "userStakeToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "appState",
           "isMut": true,
           "isSigner": false
         },
         {
           "name": "staker",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "stakeVault",
           "isMut": true,
           "isSigner": false
         },
@@ -275,77 +258,26 @@
       ]
     },
     {
-      "name": "claim",
+      "name": "unstake",
       "accounts": [
         {
           "name": "signer",
           "isMut": true,
           "isSigner": true
-        },
-        {
-          "name": "rewardMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "userRewardToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "staker",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "rewardPot",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "associatedTokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "withdraw",
-      "accounts": [
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "pool",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "staker",
-          "isMut": true,
-          "isSigner": false
         },
         {
           "name": "stakeMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userStakeToken",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -354,7 +286,12 @@
           "isSigner": false
         },
         {
-          "name": "userStakeToken",
+          "name": "appState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "staker",
           "isMut": true,
           "isSigner": false
         },
@@ -379,48 +316,48 @@
   ],
   "accounts": [
     {
-      "name": "Pool",
+      "name": "AppState",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "owner",
-            "type": "publicKey"
+            "name": "totalStaked",
+            "type": "u128"
           },
           {
             "name": "rewardPerBlock",
             "type": "u64"
           },
           {
-            "name": "rewardMint",
-            "type": "publicKey"
+            "name": "rewardAmount",
+            "type": "u128"
           },
           {
-            "name": "farmMint",
-            "type": "publicKey"
-          },
-          {
-            "name": "potBump",
-            "type": "u8"
-          },
-          {
-            "name": "vaultBump",
-            "type": "u8"
-          },
-          {
-            "name": "totalStaked",
+            "name": "stakerCounts",
             "type": "u64"
           },
           {
-            "name": "stakerCount",
-            "type": "u64"
+            "name": "owner",
+            "type": "publicKey"
           },
           {
-            "name": "rewardDecimals",
-            "type": "u8"
+            "name": "initialized",
+            "type": "bool"
           },
           {
-            "name": "farmDecimals",
+            "name": "rewardToken",
+            "type": {
+              "defined": "RewardToken"
+            }
+          },
+          {
+            "name": "stakeToken",
+            "type": {
+              "defined": "StakeToken"
+            }
+          },
+          {
+            "name": "bump",
             "type": "u8"
           }
         ]
@@ -432,12 +369,12 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "totalStaked",
+            "name": "totalAmount",
             "type": "u64"
           },
           {
-            "name": "withdraw",
-            "type": "u64"
+            "name": "user",
+            "type": "publicKey"
           },
           {
             "name": "lastUpdate",
@@ -447,11 +384,62 @@
       }
     }
   ],
+  "types": [
+    {
+      "name": "RewardToken",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakeToken",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
+          },
+          {
+            "name": "isToken2",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ],
   "errors": [
     {
       "code": 6000,
-      "name": "InvalidAmount",
-      "msg": "Invalid amount"
+      "name": "CustomError",
+      "msg": "Custom error message"
+    },
+    {
+      "code": 6001,
+      "name": "Initialized",
+      "msg": "Already Initialized"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidUnstakeAmount",
+      "msg": "Invalid unstake amount"
     }
-  ]
+  ],
+  "metadata": {
+    "address": "4w9TECYbA3bpQ8eDZbggznQLgssPACDHFM3BQMWr3vot"
+  }
 }

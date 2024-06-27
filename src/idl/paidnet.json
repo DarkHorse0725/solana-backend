@@ -3,9 +3,9 @@
   "name": "ignition",
   "constants": [
     {
-      "name": "SEED",
-      "type": "string",
-      "value": "\"anchor\""
+      "name": "DENOMINATOR",
+      "type": "u16",
+      "value": "10000"
     }
   ],
   "instructions": [
@@ -18,99 +18,29 @@
           "isSigner": true
         },
         {
+          "name": "offerMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "purchaseMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "offeredMint",
+          "name": "authority",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "offerVault",
+          "isMut": true,
           "isSigner": false
         },
         {
           "name": "pool",
           "isMut": true,
           "isSigner": true
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "times",
-          "type": {
-            "array": [
-              "i64",
-              4
-            ]
-          }
-        },
-        {
-          "name": "percents",
-          "type": {
-            "array": [
-              "u16",
-              4
-            ]
-          }
-        },
-        {
-          "name": "vesting",
-          "type": {
-            "array": [
-              "u64",
-              5
-            ]
-          }
-        },
-        {
-          "name": "hardcap",
-          "type": "u64"
-        },
-        {
-          "name": "rate",
-          "type": "u64"
-        },
-        {
-          "name": "offeredDecimals",
-          "type": "u8"
-        },
-        {
-          "name": "purchaseDecimals",
-          "type": "u8"
-        }
-      ]
-    },
-    {
-      "name": "fundIdo",
-      "accounts": [
-        {
-          "name": "signer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "userToken",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "offeredMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "idoVault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "pool",
-          "isMut": true,
-          "isSigner": false
         },
         {
           "name": "tokenProgram",
@@ -125,12 +55,79 @@
       ],
       "args": [
         {
-          "name": "amount",
-          "type": "u64"
+          "name": "uints",
+          "type": {
+            "array": [
+              "u64",
+              17
+            ]
+          }
+        },
+        {
+          "name": "offerDecimals",
+          "type": "u8"
+        },
+        {
+          "name": "purchaseDecimals",
+          "type": "u8"
+        },
+        {
+          "name": "isToken22",
+          "type": "bool"
+        },
+        {
+          "name": "private",
+          "type": "bool"
         },
         {
           "name": "bump",
           "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "fundOffer",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "offerMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ownerOfferToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "offerVault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
         }
       ]
     },
@@ -143,27 +140,27 @@
           "isSigner": true
         },
         {
-          "name": "offeredMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "purchaseMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "pool",
+          "name": "userPurchaseToken",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "userToken",
-          "isMut": true,
+          "name": "staker",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "idoVault",
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "buyer",
           "isMut": true,
           "isSigner": false
         },
@@ -173,7 +170,7 @@
           "isSigner": false
         },
         {
-          "name": "investor",
+          "name": "pool",
           "isMut": true,
           "isSigner": false
         },
@@ -192,10 +189,6 @@
         {
           "name": "amount",
           "type": "u64"
-        },
-        {
-          "name": "purchaseBump",
-          "type": "u8"
         }
       ]
     },
@@ -208,27 +201,27 @@
           "isSigner": true
         },
         {
-          "name": "offeredMint",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "purchaseMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "pool",
+          "name": "userPurchaseToken",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "userToken",
-          "isMut": true,
+          "name": "staker",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "idoVault",
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "buyer",
           "isMut": true,
           "isSigner": false
         },
@@ -238,7 +231,7 @@
           "isSigner": false
         },
         {
-          "name": "investor",
+          "name": "pool",
           "isMut": true,
           "isSigner": false
         },
@@ -257,20 +250,269 @@
         {
           "name": "amount",
           "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claimOffer",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
         },
         {
-          "name": "purchaseBump",
-          "type": "u8"
+          "name": "offerMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userOfferToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "offerVault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "buyer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "toggleClaimable",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdrawOffer",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "offerMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ownerOfferToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "offerVault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdrawPurchase",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "purchaseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ownerPurchaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardPot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakeProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "refundPurchase",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "purchaseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "userPurchaseToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "buyer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "purchaseVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "emergencyCancel",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "updateTgeDate",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "tgeDate",
+          "type": "i64"
         }
       ]
     }
   ],
   "accounts": [
     {
-      "name": "Investor",
+      "name": "Buyer",
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "principal",
+            "type": "u64"
+          },
+          {
+            "name": "fee",
+            "type": "u64"
+          },
+          {
+            "name": "withdrawn",
+            "type": "u64"
+          },
+          {
+            "name": "purchaseInEarlyPool",
+            "type": "u64"
+          },
           {
             "name": "totalAmount",
             "type": "u64"
@@ -280,8 +522,8 @@
             "type": "u64"
           },
           {
-            "name": "purchaseEarly",
-            "type": "u64"
+            "name": "refunded",
+            "type": "bool"
           }
         ]
       }
@@ -296,9 +538,9 @@
             "type": "publicKey"
           },
           {
-            "name": "offeredToken",
+            "name": "offerToken",
             "type": {
-              "defined": "OfferedToken"
+              "defined": "OfferToken"
             }
           },
           {
@@ -308,44 +550,76 @@
             }
           },
           {
-            "name": "earlyPoolStart",
+            "name": "totalRaiseAmount",
+            "type": "u64"
+          },
+          {
+            "name": "totalCollectAmount",
+            "type": "u64"
+          },
+          {
+            "name": "totalSold",
+            "type": "u64"
+          },
+          {
+            "name": "tokenFeePercentage",
+            "type": "u16"
+          },
+          {
+            "name": "totalFee",
+            "type": "u64"
+          },
+          {
+            "name": "maxBuyInEarlyPool",
+            "type": "u64"
+          },
+          {
+            "name": "earlyStart",
             "type": "i64"
           },
           {
-            "name": "earlyPoolEnd",
+            "name": "earlyEnd",
             "type": "i64"
           },
           {
-            "name": "openPoolStart",
-            "type": "i64"
+            "name": "collectInEarlyPool",
+            "type": "u64"
           },
           {
-            "name": "openPoolEnd",
-            "type": "i64"
+            "name": "soldInEarlyPool",
+            "type": "u64"
           },
           {
             "name": "earlyPoolProportion",
             "type": "u16"
           },
           {
+            "name": "earlyParticipantFee",
+            "type": "u16"
+          },
+          {
+            "name": "maxBuyForKycUser",
+            "type": "u64"
+          },
+          {
+            "name": "maxBuyForNotKycUser",
+            "type": "u64"
+          },
+          {
+            "name": "openStart",
+            "type": "i64"
+          },
+          {
+            "name": "openEnd",
+            "type": "i64"
+          },
+          {
             "name": "openPoolProportion",
             "type": "u16"
           },
           {
-            "name": "earlyPoolFeePercentage",
+            "name": "openParticipantFee",
             "type": "u16"
-          },
-          {
-            "name": "openPoolFeePercentage",
-            "type": "u16"
-          },
-          {
-            "name": "hardcap",
-            "type": "u64"
-          },
-          {
-            "name": "totalCollected",
-            "type": "u64"
           },
           {
             "name": "tgeDate",
@@ -361,18 +635,14 @@
           },
           {
             "name": "vestingFrequency",
-            "type": "u64"
+            "type": "i64"
           },
           {
             "name": "numberOfVesting",
-            "type": "u64"
+            "type": "u16"
           },
           {
             "name": "totalFundedAmount",
-            "type": "u64"
-          },
-          {
-            "name": "totalSold",
             "type": "u64"
           },
           {
@@ -384,7 +654,7 @@
             "type": "bool"
           },
           {
-            "name": "forceFailed",
+            "name": "emergencyCancelled",
             "type": "bool"
           },
           {
@@ -392,11 +662,15 @@
             "type": "bool"
           },
           {
-            "name": "idoBump",
-            "type": "u8"
+            "name": "udpateTgeAttempts",
+            "type": "u16"
           },
           {
-            "name": "purchaseBump",
+            "name": "isToken22",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
             "type": "u8"
           }
         ]
@@ -405,7 +679,7 @@
   ],
   "types": [
     {
-      "name": "OfferedToken",
+      "name": "OfferToken",
       "type": {
         "kind": "struct",
         "fields": [
@@ -414,12 +688,12 @@
             "type": "u64"
           },
           {
-            "name": "decimals",
-            "type": "u8"
-          },
-          {
             "name": "mint",
             "type": "publicKey"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
           }
         ]
       }
@@ -430,12 +704,12 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "decimals",
-            "type": "u8"
-          },
-          {
             "name": "mint",
             "type": "publicKey"
+          },
+          {
+            "name": "decimals",
+            "type": "u8"
           }
         ]
       }
@@ -444,11 +718,101 @@
   "errors": [
     {
       "code": 6000,
-      "name": "CustomError",
-      "msg": "Custom error message"
+      "name": "MaxPurchaseForKYCUserNotValid",
+      "msg": "Invalid max purchased for not kyc users"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidParam",
+      "msg": "Invalid params"
+    },
+    {
+      "code": 6002,
+      "name": "NotFunded",
+      "msg": "Not funded yet"
+    },
+    {
+      "code": 6003,
+      "name": "NotClaimable",
+      "msg": "Not claimable"
+    },
+    {
+      "code": 6004,
+      "name": "NotclaimableAmount",
+      "msg": "Not claimable amount"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidTokenFeePercentage",
+      "msg": "Inavalid token fee percentage"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidGalaxyPoolProportion",
+      "msg": "Invalid galaxy pool proportion"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidEarlyAccessProportion",
+      "msg": "Invalid early access proportion"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidTime",
+      "msg": "Invalid Time"
+    },
+    {
+      "code": 6010,
+      "name": "InvalidTGEPercentage",
+      "msg": "Invalid TGE percentage"
+    },
+    {
+      "code": 6011,
+      "name": "NotAllowedToAdjustTGEDateExceedsAttempts",
+      "msg": "Not allowed to adjust tge date exceeds attempts"
+    },
+    {
+      "code": 6012,
+      "name": "NotAllowedToAdjustTGEDateTooFar",
+      "msg": "Not allowed to adjust tge date too far"
+    },
+    {
+      "code": 6013,
+      "name": "TimeOutBuyIDOToken",
+      "msg": "Time out buy ido token"
+    },
+    {
+      "code": 6014,
+      "name": "ExceedMaxPurchaseAmountForEarlyAccess",
+      "msg": "Exceed max purchase amount for early access"
+    },
+    {
+      "code": 6015,
+      "name": "AlreadyClaimedTotoalAmount",
+      "msg": "Already claimed total amount"
+    },
+    {
+      "code": 6016,
+      "name": "NotEnoughStaker",
+      "msg": "You did not stake enough token"
+    },
+    {
+      "code": 6017,
+      "name": "CalculationFailure",
+      "msg": "General calculation failure due to overflow or underflow"
+    },
+    {
+      "code": 6018,
+      "name": "NotRefundable",
+      "msg": "Not refundable"
     }
   ],
   "metadata": {
-    "address": "3NcRBHEvPZBcDwLK1bVtBURmRg6vikwJ8b6tktQsGF2b"
+    "address": "BnwF9UvkZGPzoAm8GbuUxkfgHLB9tpK5zx25tv715J6a"
   }
 }
