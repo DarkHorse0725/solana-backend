@@ -39,17 +39,17 @@ export class PoolsController {
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
   @Post()
-  @UseInterceptors(FileInterceptor('banner', {
-    storage: diskStorage({
-      destination: 'files',
-      filename: (req, file, cb) => {
-        cb(null, v4() + path.extname(file.originalname));
-      }
-    })
-  }))
+  // @UseInterceptors(FileInterceptor('banner', {
+  //   storage: diskStorage({
+  //     destination: 'files',
+  //     filename: (req, file, cb) => {
+  //       cb(null, v4() + path.extname(file.originalname));
+  //     }
+  //   })
+  // }))
   async createPool(@Body() body: CreatePoolDto, @UploadedFile() file: Express.Multer.File, @Request() req: any) {
-    const poolData = {...body, banner: `${process.env.BASE_URL}/image/${file.filename}`, userId: req.user.sub};
-    const pool = await this.poolService.create(poolData);
+    // const poolData = {...body, banner: `${process.env.BASE_URL}/image/${file.filename}`, userId: req.user.sub};
+    const pool = await this.poolService.create(body);
     return pool;
   }
 }
