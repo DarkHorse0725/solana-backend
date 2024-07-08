@@ -46,7 +46,7 @@ export class Pool extends Model {
   @Column
   mint: string;
 
-  @Column
+  @Column({type: DataType.DOUBLE})
   price: number;
 
   @Column

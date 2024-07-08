@@ -30,6 +30,13 @@ export class PoolsController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Get('user/:userId')
+  async getUserPool (@Param() {userId}: {userId: string;}) {
+    const pool = await this.poolService.getUserPool(userId);
+    return pool;
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Get('account/:pubkey')
   async getPoolAccount (@Param() {pubkey}: {pubkey: string;}) {
     const pool = await this.poolService.getPool(pubkey);

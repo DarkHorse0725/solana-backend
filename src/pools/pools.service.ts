@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Pool } from './pools.model';
 import { CreatePoolDto } from './pools.dto';
-import { getPoolByPubkey, getPools } from 'src/utils/solana.utils';
+import { getPoolByPubkey } from 'src/utils/solana.utils';
 
 @Injectable()
 export class PoolsService {
@@ -14,9 +14,8 @@ export class PoolsService {
     return this.pools.create(poolData);
   }
 
-  async getPools () {
-    const pools = await getPools();
-    return pools;
+  async getPools (): Promise<Pool[]> {
+    return this.pools.findAll();
   }
 
   findByPubkey(pubkey: string): Promise<Pool> {
@@ -26,5 +25,9 @@ export class PoolsService {
   async getPool (pubkey: string) {
     const pool = await getPoolByPubkey(pubkey);
     return pool;
+  }
+
+  getUserPool (userId: string): Promise<Pool[]> {
+    return this.pools.findAll({where: {userId}});
   }
 }

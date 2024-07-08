@@ -59,21 +59,9 @@
           "type": {
             "array": [
               "u64",
-              17
+              18
             ]
           }
-        },
-        {
-          "name": "offerDecimals",
-          "type": "u8"
-        },
-        {
-          "name": "purchaseDecimals",
-          "type": "u8"
-        },
-        {
-          "name": "isToken22",
-          "type": "bool"
         },
         {
           "name": "private",
@@ -110,7 +98,7 @@
         },
         {
           "name": "offerVault",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -120,6 +108,11 @@
         },
         {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -141,6 +134,11 @@
         },
         {
           "name": "purchaseMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "offerMint",
           "isMut": false,
           "isSigner": false
         },
@@ -176,6 +174,11 @@
         },
         {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgramOffer",
           "isMut": false,
           "isSigner": false
         },
@@ -206,13 +209,13 @@
           "isSigner": false
         },
         {
-          "name": "userPurchaseToken",
-          "isMut": true,
+          "name": "offerMint",
+          "isMut": false,
           "isSigner": false
         },
         {
-          "name": "staker",
-          "isMut": false,
+          "name": "userPurchaseToken",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -237,6 +240,11 @@
         },
         {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgramOffer",
           "isMut": false,
           "isSigner": false
         },
@@ -390,17 +398,7 @@
           "isSigner": false
         },
         {
-          "name": "rewardPot",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "stakeProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -489,6 +487,31 @@
           "type": "i64"
         }
       ]
+    },
+    {
+      "name": "updateTime",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "pool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newOpenPoolStart",
+          "type": "i64"
+        },
+        {
+          "name": "newOpenPoolEnd",
+          "type": "i64"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -545,9 +568,7 @@
           },
           {
             "name": "purchaseToken",
-            "type": {
-              "defined": "PurchaseToken"
-            }
+            "type": "publicKey"
           },
           {
             "name": "totalRaiseAmount",
@@ -666,10 +687,6 @@
             "type": "u16"
           },
           {
-            "name": "isToken22",
-            "type": "bool"
-          },
-          {
             "name": "bump",
             "type": "u8"
           }
@@ -690,26 +707,6 @@
           {
             "name": "mint",
             "type": "publicKey"
-          },
-          {
-            "name": "decimals",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "PurchaseToken",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "mint",
-            "type": "publicKey"
-          },
-          {
-            "name": "decimals",
-            "type": "u8"
           }
         ]
       }
