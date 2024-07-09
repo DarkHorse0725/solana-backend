@@ -20,6 +20,9 @@ export class User extends Model {
   @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
   wallets: string[];
 
+  @Column({type: DataType.ENUM('user', 'admin'), defaultValue: 'user'})
+  role: string;
+
   @Column
   telegram: string;
 
