@@ -6,6 +6,8 @@ import { PurchaseTokenService } from './purchase-token/purchase-token.service';
 import { TagsService } from './tags/tags.service';
 import { purchaseTokens } from './seeds/purchase-tokens';
 import { tags } from './seeds/tags';
+import { StatService } from './stat/stat.service';
+import { stats } from './seeds/stats';
 
 @Injectable()
 export class AppService implements OnApplicationBootstrap {
@@ -14,6 +16,7 @@ export class AppService implements OnApplicationBootstrap {
     private countryService: CountriesService,
     private purchaseTokenService: PurchaseTokenService,
     private tagService: TagsService,
+    private statService: StatService,
   ){}
   onApplicationBootstrap() {
     try {
@@ -25,6 +28,7 @@ export class AppService implements OnApplicationBootstrap {
       // this.seedCountries();
       // this.seedPurchaseTokens();
       // this.seedTags();
+      // this.seedStats();
     } catch (e) {
       console.log(e);
     }
@@ -37,6 +41,9 @@ export class AppService implements OnApplicationBootstrap {
   }
   seedTags() {
     this.tagService.createMany(tags);
+  }
+  seedStats() {
+    this.statService.create(stats[0]);
   }
   getHello(): string {
     return 'Hello World!';

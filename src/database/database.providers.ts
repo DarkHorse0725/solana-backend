@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Country } from 'src/countries/countries.model';
 import { Pool } from 'src/pools/pools.model';
 import { PurchaseToken } from 'src/purchase-token/purchase-token.model';
+import { Stat } from 'src/stat/stat.model';
 import { Tag } from 'src/tags/tags.model';
 import { User } from 'src/users/users.model';
 
@@ -25,6 +26,7 @@ export const databaseProviders = [
         Country,
         PurchaseToken,
         Tag,
+        Stat
       ]);
       await sequelize.sync();
       return sequelize;

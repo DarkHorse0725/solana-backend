@@ -9,6 +9,7 @@ import { PoolsModule } from './pools/pools.module';
 import { CountriesModule } from './countries/countries.module';
 import { PurchaseTokenModule } from './purchase-token/purchase-token.module';
 import { TagsModule } from './tags/tags.module';
+import { StatModule } from './stat/stat.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { TagsModule } from './tags/tags.module';
     PoolsModule,
     CountriesModule,
     PurchaseTokenModule,
-    TagsModule
+    TagsModule,
+    StatModule
   ],
   controllers: [AppController],
   providers: [AppService],
