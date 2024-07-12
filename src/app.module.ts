@@ -10,6 +10,7 @@ import { CountriesModule } from './countries/countries.module';
 import { PurchaseTokenModule } from './purchase-token/purchase-token.module';
 import { TagsModule } from './tags/tags.module';
 import { StatModule } from './stat/stat.module';
+import { RpcProvidersModule } from './rpc-providers/rpc-providers.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { StatModule } from './stat/stat.module';
     CountriesModule,
     PurchaseTokenModule,
     TagsModule,
-    StatModule
+    StatModule,
+    RpcProvidersModule
   ],
   controllers: [AppController],
   providers: [AppService],
