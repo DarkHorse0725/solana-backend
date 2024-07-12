@@ -35,6 +35,27 @@ export class Pool extends Model {
   mainImageUrl: string;
 
   @Column
+  featuredImageVideoUrl: string;
+
+  @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
+  tags: string[];
+
+  @Column
+  announcementDate: Date;
+
+  @Column({type: DataType.ENUM('draft', 'published', 'live', 'cancelled', 'emergency_cancelled', 'finished'), defaultValue: 'draft'})
+  status: string;
+
+  @Column({type: DataType.ENUM('default', 'appearing', 'purchasing', 'vesting', 'refunding'), defaultValue: 'default'})
+  stage: string;
+
+  @Column
+  ended: boolean;
+
+  @Column
+  canJoin: boolean;
+  
+  @Column
   currency: string;
 
   @Column

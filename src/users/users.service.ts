@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from './users.model';
 import { CreateUserDto, UpdateUserDto } from './users.dto';
+import { Pool } from 'src/pools/pools.model';
 
 @Injectable()
 export class UsersService {
@@ -24,5 +25,10 @@ export class UsersService {
   async updateUserById(id: string, data: UpdateUserDto): Promise<User> {
     await this.users.update(data, {where: {id}});
     return this.users.findByPk(id);
+  }
+
+  async findCollaboarators() {
+    const users = await this.users.findAll({include: [{model: Pool}]});
+    return users.filter(user => user.pools.length > 0);
   }
 }

@@ -6,6 +6,9 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PoolsModule } from './pools/pools.module';
+import { CountriesModule } from './countries/countries.module';
+import { PurchaseTokenModule } from './purchase-token/purchase-token.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -15,7 +18,10 @@ import { PoolsModule } from './pools/pools.module';
     }),
     UsersModule,
     AuthModule,
-    PoolsModule
+    PoolsModule,
+    CountriesModule,
+    PurchaseTokenModule,
+    TagsModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Country } from 'src/countries/countries.model';
 import { Pool } from 'src/pools/pools.model';
+import { PurchaseToken } from 'src/purchase-token/purchase-token.model';
+import { Tag } from 'src/tags/tags.model';
 import { User } from 'src/users/users.model';
 
 
@@ -18,7 +21,10 @@ export const databaseProviders = [
       });
       sequelize.addModels([
         User,
-        Pool
+        Pool,
+        Country,
+        PurchaseToken,
+        Tag,
       ]);
       await sequelize.sync();
       return sequelize;

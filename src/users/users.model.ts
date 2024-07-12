@@ -20,14 +20,26 @@ export class User extends Model {
   @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
   wallets: string[];
 
-  @Column({type: DataType.ENUM('user', 'admin'), defaultValue: 'user'})
+  @Column({type: DataType.ENUM('super_admin', 'editor', 'viewer'), defaultValue: 'viewer'})
   role: string;
 
   @Column
   telegram: string;
 
-  @Column({type: DataType.ARRAY(DataType.JSON)})
-  socials: object[];
+  @Column
+  firstName: string;
+
+  @Column
+  lastName: string;
+
+  @Column({type: DataType.ENUM('active', 'suspend', 'inactive'), defaultValue: 'active'})
+  status: string;
+
+  @Column
+  twoFactorSecret: string;
+
+  @Column({defaultValue: false})
+  twoFactorEnabled: boolean;
 
   @HasMany(() => Pool)
   pools: Pool[]
