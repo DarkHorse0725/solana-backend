@@ -42,5 +42,5 @@ export class User extends Model {
   twoFactorEnabled: boolean;
 
   @HasMany(() => Pool)
-  pools: Pool[]
+  pools: Pool[];
 }   

@@ -8,4 +8,8 @@ export type UpdateUserDto = {
   password?: string;
   telegram?: string;
   wallets?: string[];
+  role?: string;
+  firstName?: string;
+  lastName?: string;
 }
+

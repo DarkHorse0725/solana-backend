@@ -1,4 +1,5 @@
-import { Table, Column, Model, Unique, BelongsTo, DataType, PrimaryKey, ForeignKey, HasOne, HasMany} from 'sequelize-typescript';
+import { Table, Column, Model, Unique, BelongsTo, DataType, PrimaryKey, ForeignKey, HasOne, HasMany, BelongsToMany} from 'sequelize-typescript';
+import { Tag } from 'src/tags/tags.model';
 import { User } from 'src/users/users.model';
 
 
@@ -36,9 +37,6 @@ export class Pool extends Model {
 
   @Column
   featuredImageVideoUrl: string;
-
-  @Column({type: DataType.ARRAY(DataType.STRING), defaultValue: []})
-  tags: string[];
 
   @Column
   announcementDate: Date;
@@ -145,4 +143,11 @@ export class Pool extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @ForeignKey(() => Tag)
+  @Column({type: DataType.ARRAY(DataType.UUID)})
+  tagIds: string[];
+
+  @HasMany(() => Tag, {foreignKey: 'id'})
+  tags: Tag[];
 }  

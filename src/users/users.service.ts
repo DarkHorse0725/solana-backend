@@ -27,8 +27,9 @@ export class UsersService {
     return this.users.findByPk(id);
   }
 
-  async findCollaboarators() {
-    const users = await this.users.findAll({include: [{model: Pool}]});
-    return users.filter(user => user.pools.length > 0);
+  findCollaboarators(): Promise<User[]> {
+    return this.users.findAll({
+      where: {role: 'editor'}
+    })
   }
 }

@@ -20,11 +20,7 @@ export class AppService implements OnApplicationBootstrap {
   ){}
   onApplicationBootstrap() {
     try {
-      // this.authService.signUp({
-      //   email: 'admin@paid.com',
-      //   password: 'admin123',
-      //   role: 'admin'
-      // })
+      // this.seedAdmin();
       // this.seedCountries();
       // this.seedPurchaseTokens();
       // this.seedTags();
@@ -32,6 +28,14 @@ export class AppService implements OnApplicationBootstrap {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  seedAdmin() {
+    this.authService.signUp({
+      email: 'admin@paid.com',
+      password: 'admin123',
+      role: 'super_admin'
+    })
   }
   seedCountries() {
     this.countryService.createMany(countries)

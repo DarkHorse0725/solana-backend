@@ -36,4 +36,5 @@ export type CreatePoolDto = {
   telegram?: string;
   website?: string;
   medium?: string;
+  tagIds: string[];
 }
